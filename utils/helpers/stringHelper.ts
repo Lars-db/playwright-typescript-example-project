@@ -108,17 +108,6 @@ export class StringHelper {
     }
   
     /**
-     * Validates if the given string is in a proper email format.
-     * 
-     * @param email - The email string to validate.
-     * @returns `true` if the email is in a valid format, otherwise `false`.
-     */
-    static isValidEmail(email: string): boolean {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-  
-    /**
      * Reverses the characters in a given string.
      * 
      * @param str - The input string to reverse.
