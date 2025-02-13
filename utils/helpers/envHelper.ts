@@ -103,9 +103,9 @@ export class EnvHelper {
 
     /**
      * Gets all environment variables as a key-value object.
-     * @returns {Record<string, string>} - An object containing all environment variables.
+     * @returns {Record<string, string | undefined>} - An object containing all environment variables.
      */
-    public static getAllEnv(): Record<string, string> {
+    public static getAllEnv(): Record<string, string | undefined> {
         return process.env;
     }
 }
