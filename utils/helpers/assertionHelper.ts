@@ -447,7 +447,7 @@ export class AssertionHelper {
 
             // If there are mismatches, log them and throw an error message
             if (mismatches.length > 0) {
-                const mismatchDetails = mismatches.join(', ');
+                const mismatchDetails = mismatches.join('\n');
                 const detailedMessage = `${message} Mismatches: ${mismatchDetails}`;
                 console.error(`Assertion failed: ${detailedMessage}`);
             }
