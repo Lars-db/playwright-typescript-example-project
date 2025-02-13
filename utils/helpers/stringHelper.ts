@@ -1,3 +1,5 @@
+import { randomUUID } from 'crypto'; // For generating random UUIDs
+
 export class StringHelper {
   
     /**
@@ -199,5 +201,12 @@ export class StringHelper {
     static stripHtmlTags(html: string): string {
       return html.replace(/<\/?[^>]+(>|$)/g, '');
     }
-  
+
+    /**
+     * Generates a random UUID.
+     * @returns {string} - The generated UUID.
+     */
+       public static generateUUID(): string {
+        return randomUUID();
+    }
 }
