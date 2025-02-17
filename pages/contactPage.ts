@@ -1,5 +1,6 @@
 import { BasePage } from './basePage';
 import { Page } from '@playwright/test';
+import { actionHelper } from '../utils/helpers/actionHelper.ts';
 
 export class ContactPage extends BasePage {
   constructor(page: Page) {
@@ -19,7 +20,7 @@ export class ContactPage extends BasePage {
   }
 
   async submitForm() {
-    await this.click(this.submitButton);
+    await actionHelper.clickElement(this.page, this.submitButton);
   }
 
   async getSuccessMessage() {

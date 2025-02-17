@@ -1,6 +1,6 @@
 import { Page, Cookie, Locator } from '@playwright/test';
 
-class actionHelper {
+export class actionHelper {
     /**
      * Gets the text content of an element.
      * @param {Page} page - The page instance.
@@ -171,18 +171,23 @@ class actionHelper {
     }
 
     /**
-     * Clicks on an element identified by a selector.
+     * Clicks on an element identified by a selector or a Locator.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the element.
+     * @param {string | Locator} selector - The CSS selector for the element or a Locator instance.
      * @param {number} [timeout=30000] - Optional timeout for the click action.
      * @returns {Promise<void>}
      */
-    public static async clickElement(page: Page, selector: string, timeout: number = 30000): Promise<void> {
+    public static async clickElement(page: Page, selector: string | Locator, timeout: number = 30000): Promise<void> {
         try {
-            await page.click(selector, { timeout });
-            console.log(`Clicked on element: ${selector}`);
+            const locator = typeof selector === 'string' ? page.locator(selector) : selector;
+
+            // Wait for the element to be visible and clickable before clicking
+            await locator.waitFor({ state: 'visible', timeout });
+            await locator.click({ timeout });
+
+            console.log(`Clicked on element: ${typeof selector === 'string' ? selector : selector.toString()}`);
         } catch (error) {
-            console.error(`Error clicking on element "${selector}":`, error);
+            console.error(`Error clicking on element "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
             throw error;
         }
     }
