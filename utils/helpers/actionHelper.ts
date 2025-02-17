@@ -27,19 +27,28 @@ export class actionHelper {
         }
     }
 
-    /**
+/**
      * Waits for an element to appear on the page.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the element.
+     * @param {string | Locator} selectorOrLocator - The CSS selector as a string or a Playwright Locator.
      * @param {number} timeout - Timeout in milliseconds (default: 30000ms).
      * @returns {Promise<void>}
      */
-    public static async waitForElement(page: Page, selector: string, timeout: number = 30000): Promise<void> {
+    public static async waitForElement(
+        page: Page, 
+        selectorOrLocator: string | Locator, 
+        timeout: number = 30000
+    ): Promise<void> {
         try {
-            await page.waitForSelector(selector, { timeout });
-            logger.debug(`Element "${selector}" appeared on the page.`);
+            if (typeof selectorOrLocator === 'string') {
+                await page.waitForSelector(selectorOrLocator, { timeout });
+                logger.debug(`Element "${selectorOrLocator}" appeared on the page.`);
+            } else {
+                await selectorOrLocator.waitFor({ state: 'visible', timeout });
+                logger.debug(`Element "${selectorOrLocator}" appeared on the page.`);
+            }
         } catch (error) {
-            logger.error(`Timeout waiting for element "${selector}"`, error);
+            logger.error(`Timeout waiting for element "${selectorOrLocator}"`, error);
             throw error;
         }
     }
@@ -219,19 +228,28 @@ export class actionHelper {
     }
 
 
-    /**
+/**
      * Double clicks on an element.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the element.
-     * @param {number} [timeout=30000] - Optional timeout for the double click action.
+     * @param {string | Locator} selectorOrLocator - The CSS selector as a string or a Playwright Locator.
+     * @param {number} [timeout=30000] - Optional timeout for the double-click action.
      * @returns {Promise<void>}
      */
-    public static async doubleClickElement(page: Page, selector: string, timeout: number = 30000): Promise<void> {
+    public static async doubleClickElement(
+        page: Page, 
+        selectorOrLocator: string | Locator, 
+        timeout: number = 30000
+    ): Promise<void> {
         try {
-            await page.dblclick(selector, { timeout });
-            logger.debug(`Double clicked on element: ${selector}`);
+            if (typeof selectorOrLocator === 'string') {
+                await page.dblclick(selectorOrLocator, { timeout });
+                logger.debug(`Double clicked on element: "${selectorOrLocator}"`);
+            } else {
+                await selectorOrLocator.dblclick({ timeout });
+                logger.debug(`Double clicked on element: "${selectorOrLocator}"`);
+            }
         } catch (error) {
-            logger.error(`Error double-clicking on element "${selector}":`, error);
+            logger.error(`Error double-clicking on element "${selectorOrLocator}":`, error);
             throw error;
         }
     }
@@ -239,16 +257,25 @@ export class actionHelper {
     /**
      * Hovers over an element.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the element.
+     * @param {string | Locator} selectorOrLocator - The CSS selector as a string or a Playwright Locator.
      * @param {number} [timeout=30000] - Optional timeout for the hover action.
      * @returns {Promise<void>}
      */
-    public static async hoverOverElement(page: Page, selector: string, timeout: number = 30000): Promise<void> {
+    public static async hoverOverElement(
+        page: Page, 
+        selectorOrLocator: string | Locator, 
+        timeout: number = 30000
+    ): Promise<void> {
         try {
-            await page.hover(selector, { timeout });
-            logger.debug(`Hovered over element: ${selector}`);
+            if (typeof selectorOrLocator === 'string') {
+                await page.hover(selectorOrLocator, { timeout });
+                logger.debug(`Hovered over element: "${selectorOrLocator}"`);
+            } else {
+                await selectorOrLocator.hover({ timeout });
+                logger.debug(`Hovered over element: "${selectorOrLocator}"`);
+            }
         } catch (error) {
-            logger.error(`Error hovering over element "${selector}":`, error);
+            logger.error(`Error hovering over element "${selectorOrLocator}":`, error);
             throw error;
         }
     }
@@ -274,15 +301,25 @@ export class actionHelper {
     /**
      * Scrolls the page to bring an element into view.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the element.
+     * @param {string | Locator} selectorOrLocator - The CSS selector as a string or a Playwright Locator.
      * @returns {Promise<void>}
      */
-    public static async scrollToElement(page: Page, selector: string): Promise<void> {
+    public static async scrollToElement(
+        page: Page, 
+        selectorOrLocator: string | Locator
+    ): Promise<void> {
         try {
-            await page.$eval(selector, (element: HTMLElement) => element.scrollIntoView({ behavior: 'smooth', block: 'center' }));
-            logger.debug(`Scrolled to element: ${selector}`);
+            if (typeof selectorOrLocator === 'string') {
+                await page.$eval(selectorOrLocator, (element: HTMLElement) => {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+                logger.debug(`Scrolled to element: "${selectorOrLocator}"`);
+            } else {
+                await selectorOrLocator.scrollIntoViewIfNeeded();
+                logger.debug(`Scrolled to element using locator: "${selectorOrLocator}"`);
+            }
         } catch (error) {
-            logger.error(`Error scrolling to element "${selector}":`, error);
+            logger.error(`Error scrolling to element "${selectorOrLocator}":`, error);
             throw error;
         }
     }
@@ -290,15 +327,23 @@ export class actionHelper {
     /**
      * Clears the input field.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the input field.
+     * @param {string | Locator} selectorOrLocator - The CSS selector as a string or a Playwright Locator.
      * @returns {Promise<void>}
      */
-    public static async clearInputField(page: Page, selector: string): Promise<void> {
+    public static async clearInputField(
+        page: Page, 
+        selectorOrLocator: string | Locator
+    ): Promise<void> {
         try {
-            await page.fill(selector, '');
-            logger.debug(`Cleared input field: ${selector}`);
+            if (typeof selectorOrLocator === 'string') {
+                await page.fill(selectorOrLocator, '');
+                logger.debug(`Cleared input field: "${selectorOrLocator}"`);
+            } else {
+                await selectorOrLocator.fill('');
+                logger.debug(`Cleared input field using locator: "${selectorOrLocator}"`);
+            }
         } catch (error) {
-            logger.error(`Error clearing input field "${selector}":`, error);
+            logger.error(`Error clearing input field "${selectorOrLocator}":`, error);
             throw error;
         }
     }
