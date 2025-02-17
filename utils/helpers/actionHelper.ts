@@ -1,4 +1,5 @@
 import { Page, Cookie, Locator } from '@playwright/test';
+import { logger } from '../logger';
 
 export class actionHelper {
     /**
@@ -17,11 +18,11 @@ export class actionHelper {
 
             // Retrieve the text content
             const text = await locator.innerText();
-            console.log(`Text from element: ${text}`);
+            logger.debug('Text from element: ', text)
 
             return text;
         } catch (error) {
-            console.error(`Error getting text from element "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
+            logger.error(`Error getting text from element "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
             throw error;
         }
     }
@@ -36,9 +37,9 @@ export class actionHelper {
     public static async waitForElement(page: Page, selector: string, timeout: number = 30000): Promise<void> {
         try {
             await page.waitForSelector(selector, { timeout });
-            console.log(`Element "${selector}" appeared on the page.`);
+            logger.debug(`Element "${selector}" appeared on the page.`);
         } catch (error) {
-            console.error(`Timeout waiting for element "${selector}"`, error);
+            logger.error(`Timeout waiting for element "${selector}"`, error);
             throw error;
         }
     }
@@ -51,10 +52,10 @@ export class actionHelper {
     public static async getPageTitle(page: Page): Promise<string> {
         try {
             const title = await page.title();
-            console.log(`Page title: "${title}"`);
+            logger.debug(`Page title: "${title}"`);
             return title;
         } catch (error) {
-            console.error('Error getting page title:', error);
+            logger.error('Error getting page title:', error);
             throw error;
         }
     }
@@ -69,9 +70,9 @@ export class actionHelper {
             await page.evaluate(() => {
                 window.localStorage.clear();
             });
-            console.log('Local Storage cleared.');
+            logger.info('Local Storage cleared.');
         } catch (error) {
-            console.error('Error clearing local storage:', error);
+            logger.error('Error clearing local storage:', error);
             throw error;
         }
     }
@@ -86,9 +87,9 @@ export class actionHelper {
             await page.evaluate(() => {
                 window.sessionStorage.clear();
             });
-            console.log('Session Storage cleared.');
+            logger.info('Session Storage cleared.');
         } catch (error) {
-            console.error('Error clearing session storage:', error);
+            logger.error('Error clearing session storage:', error);
             throw error;
         }
     }
@@ -102,9 +103,9 @@ export class actionHelper {
     public static async setCookie(page: Page, cookie: Cookie): Promise<void> {
         try {
             await page.context().addCookies([cookie]);
-            console.log(`Cookie set: ${JSON.stringify(cookie)}`);
+            logger.info(`Cookie set: ${JSON.stringify(cookie)}`);
         } catch (error) {
-            console.error(`Error setting cookie:`, error);
+            logger.error(`Error setting cookie:`, error);
             throw error;
         }
     }
@@ -119,7 +120,7 @@ export class actionHelper {
             const cookies = await page.context().cookies();
             return cookies;
         } catch (error) {
-            console.error(`Error getting cookies:`, error);
+            logger.error(`Error getting cookies:`, error);
             throw error;
         }
     }
@@ -132,9 +133,9 @@ export class actionHelper {
     public static async clearCookies(page: Page): Promise<void> {
         try {
             await page.context().clearCookies();
-            console.log('Cookies cleared');
+            logger.info('Cookies cleared');
         } catch (error) {
-            console.error(`Error clearing cookies:`, error);
+            logger.error(`Error clearing cookies:`, error);
             throw error;
         }
     }
@@ -150,7 +151,7 @@ export class actionHelper {
         try {
             await page.goto(url, { timeout });
         } catch (error) {
-            console.error(`Error navigating to URL ${url}:`, error);
+            logger.error(`Error navigating to URL ${url}:`, error);
             throw error;
         }
     }
@@ -165,9 +166,9 @@ export class actionHelper {
     public static async takeScreenshot(page: Page, filePath: string, fullPage: boolean = false): Promise<void> {
         try {
             await page.screenshot({ path: filePath, fullPage });
-            console.log(`Screenshot saved at ${filePath}`);
+            logger.info(`Screenshot saved at ${filePath}`);
         } catch (error) {
-            console.error(`Error taking screenshot:`, error);
+            logger.error(`Error taking screenshot:`, error);
             throw error;
         }
     }
@@ -187,9 +188,9 @@ export class actionHelper {
             await locator.waitFor({ state: 'visible', timeout });
             await locator.click({ timeout });
 
-            console.log(`Clicked on element: ${typeof selector === 'string' ? selector : selector.toString()}`);
+            logger.debug(`Clicked on element: ${typeof selector === 'string' ? selector : selector.toString()}`);
         } catch (error) {
-            console.error(`Error clicking on element "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
+            logger.error(`Error clicking on element "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
             throw error;
         }
     }
@@ -210,9 +211,9 @@ export class actionHelper {
             await locator.waitFor({ state: 'visible', timeout });
             await locator.fill(text, { timeout });
 
-            console.log(`Typed "${text}" into field: ${typeof selector === 'string' ? selector : selector.toString()}`);
+            logger.debug(`Typed "${text}" into field: ${typeof selector === 'string' ? selector : selector.toString()}`);
         } catch (error) {
-            console.error(`Error typing into field "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
+            logger.error(`Error typing into field "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
             throw error;
         }
     }
@@ -228,9 +229,9 @@ export class actionHelper {
     public static async doubleClickElement(page: Page, selector: string, timeout: number = 30000): Promise<void> {
         try {
             await page.dblclick(selector, { timeout });
-            console.log(`Double clicked on element: ${selector}`);
+            logger.debug(`Double clicked on element: ${selector}`);
         } catch (error) {
-            console.error(`Error double-clicking on element "${selector}":`, error);
+            logger.error(`Error double-clicking on element "${selector}":`, error);
             throw error;
         }
     }
@@ -245,9 +246,9 @@ export class actionHelper {
     public static async hoverOverElement(page: Page, selector: string, timeout: number = 30000): Promise<void> {
         try {
             await page.hover(selector, { timeout });
-            console.log(`Hovered over element: ${selector}`);
+            logger.debug(`Hovered over element: ${selector}`);
         } catch (error) {
-            console.error(`Error hovering over element "${selector}":`, error);
+            logger.error(`Error hovering over element "${selector}":`, error);
             throw error;
         }
     }
@@ -263,9 +264,9 @@ export class actionHelper {
     public static async selectOption(page: Page, selector: string, optionValue: string, timeout: number = 30000): Promise<void> {
         try {
             await page.selectOption(selector, optionValue, { timeout });
-            console.log(`Selected option with value "${optionValue}" from dropdown: ${selector}`);
+            logger.debug(`Selected option with value "${optionValue}" from dropdown: ${selector}`);
         } catch (error) {
-            console.error(`Error selecting option from dropdown "${selector}":`, error);
+            logger.error(`Error selecting option from dropdown "${selector}":`, error);
             throw error;
         }
     }
@@ -279,9 +280,9 @@ export class actionHelper {
     public static async scrollToElement(page: Page, selector: string): Promise<void> {
         try {
             await page.$eval(selector, (element: HTMLElement) => element.scrollIntoView({ behavior: 'smooth', block: 'center' }));
-            console.log(`Scrolled to element: ${selector}`);
+            logger.debug(`Scrolled to element: ${selector}`);
         } catch (error) {
-            console.error(`Error scrolling to element "${selector}":`, error);
+            logger.error(`Error scrolling to element "${selector}":`, error);
             throw error;
         }
     }
@@ -295,9 +296,9 @@ export class actionHelper {
     public static async clearInputField(page: Page, selector: string): Promise<void> {
         try {
             await page.fill(selector, '');
-            console.log(`Cleared input field: ${selector}`);
+            logger.debug(`Cleared input field: ${selector}`);
         } catch (error) {
-            console.error(`Error clearing input field "${selector}":`, error);
+            logger.error(`Error clearing input field "${selector}":`, error);
             throw error;
         }
     }
@@ -326,10 +327,10 @@ export class actionHelper {
         }
 
         await this.performDragAndDrop(page, sourceBox, targetBox);
-        console.log(`Dragged element successfully`);
+        logger.debug(`Dragged element successfully`);
         
         } catch (error) {
-        console.error('Error performing drag and drop:', error);
+        logger.error('Error performing drag and drop:', error);
         throw error;
         }
     }

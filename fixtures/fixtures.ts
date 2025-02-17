@@ -3,6 +3,7 @@ import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
 import { BrowserHelper } from '../utils/helpers/browserHelper';
 import { ContactPage } from '../pages/contactPage';
+import { AssertionHelper } from '../utils/helpers/assertionHelper';
 
 export type MyFixtures = {
   browser: Browser;
@@ -10,6 +11,7 @@ export type MyFixtures = {
   loginPage: LoginPage;
   dashboardPage: DashboardPage;
   contactPage: ContactPage;
+  assertionHelper: AssertionHelper;
 };
 
 const test = baseTest.extend<MyFixtures>({
@@ -31,6 +33,10 @@ const test = baseTest.extend<MyFixtures>({
   },
   contactPage: async ({ page }, use) => {
     await use(new ContactPage(page));
+  },
+  assertionHelper: async ({}, use) => {
+    const assertionHelper = new AssertionHelper();
+    await use(assertionHelper);
   }
 });
 

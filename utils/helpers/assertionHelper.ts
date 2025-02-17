@@ -8,7 +8,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public static hardAssertEqual(actual: any, expected: any, message: string = ''): void {
+    public hardAssertEqual(actual: any, expected: any, message?: string): void {
         try {
             expect(actual).toBe(expected);
         } catch (error) {
@@ -23,7 +23,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertEqual(actual: any, expected: any, message: string = ''): void {
+    public softAssertEqual(actual: any, expected: any, message?: string): void {
         try {
             expect.soft(actual).toBe(expected);
         } catch (error) {
@@ -37,7 +37,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public static hardAssertNotEqual(actual: any, expected: any, message: string = ''): void {
+    public hardAssertNotEqual(actual: any, expected: any, message?: string): void {
         try {
             expect(actual).not.toBe(expected);
         } catch (error) {
@@ -52,7 +52,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertNotEqual(actual: any, expected: any, message: string = ''): void {
+    public softAssertNotEqual(actual: any, expected: any, message?: string): void {
         try {
             expect.soft(actual).not.toBe(expected);
         } catch (error) {
@@ -65,7 +65,7 @@ export class AssertionHelper {
      * @param {boolean} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static hardAssertTrue(actual: boolean, message: string = ''): void {
+    public hardAssertTrue(actual: boolean, message?: string): void {
         try {
             expect(actual).toBe(true);
         } catch (error) {
@@ -79,7 +79,7 @@ export class AssertionHelper {
      * @param {boolean} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertTrue(actual: boolean, message: string = ''): void {
+    public softAssertTrue(actual: boolean, message?: string): void {
         try {
             expect.soft(actual).toBe(true);
         } catch (error) {
@@ -92,7 +92,7 @@ export class AssertionHelper {
      * @param {boolean} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static hardAssertFalse(actual: boolean, message: string = ''): void {
+    public hardAssertFalse(actual: boolean, message?: string): void {
         try {
             expect(actual).toBe(false);
         } catch (error) {
@@ -106,7 +106,7 @@ export class AssertionHelper {
      * @param {boolean} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertFalse(actual: boolean, message: string = ''): void {
+    public softAssertFalse(actual: boolean, message?: string): void {
         try {
             expect.soft(actual).toBe(false);
         } catch (error) {
@@ -119,7 +119,7 @@ export class AssertionHelper {
      * @param {any} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static hardAssertDefined(actual: any, message: string = ''): void {
+    public hardAssertDefined(actual: any, message?: string): void {
         try {
             expect(actual).not.toBeNull();
             expect(actual).not.toBeUndefined();
@@ -134,7 +134,7 @@ export class AssertionHelper {
      * @param {any} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertDefined(actual: any, message: string = ''): void {
+    public softAssertDefined(actual: any, message?: string): void {
         try {
             expect.soft(actual).not.toBeNull();
             expect.soft(actual).not.toBeUndefined();
@@ -148,7 +148,7 @@ export class AssertionHelper {
      * @param {any} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static hardAssertNull(actual: any, message: string = ''): void {
+    public hardAssertNull(actual: any, message?: string): void {
         try {
             expect(actual).toBeNull();
         } catch (error) {
@@ -162,7 +162,7 @@ export class AssertionHelper {
      * @param {any} actual - The value to be tested.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertNull(actual: any, message: string = ''): void {
+    public softAssertNull(actual: any, message?: string): void {
         try {
             expect.soft(actual).toBeNull();
         } catch (error) {
@@ -176,7 +176,7 @@ export class AssertionHelper {
      * @param {string} expectedSubstring - The expected substring.
      * @param {string} [message] - Optional custom error message.
      */
-    public static hardAssertContains(actual: string, expectedSubstring: string, message: string = ''): void {
+    public hardAssertContains(actual: string, expectedSubstring: string, message?: string): void {
         try {
             expect(actual).toContain(expectedSubstring);
         } catch (error) {
@@ -191,7 +191,7 @@ export class AssertionHelper {
      * @param {string} expectedSubstring - The expected substring.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertContains(actual: string, expectedSubstring: string, message: string = ''): void {
+    public softAssertContains(actual: string, expectedSubstring: string, message?: string): void {
         try {
             expect.soft(actual).toContain(expectedSubstring);
         } catch (error) {
@@ -204,7 +204,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementVisible(element: any, message: string = ''): Promise<void> {
+    public async hardAssertElementVisible(element: any, message?: string): Promise<void> {
         try {
             await expect(element).toBeVisible();
         } catch (error) {
@@ -218,7 +218,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementVisible(element: any, message: string = ''): Promise<void> {
+    public async softAssertElementVisible(element: any, message?: string): Promise<void> {
         try {
             await expect.soft(element).toBeVisible();
         } catch (error) {
@@ -231,7 +231,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementHidden(element: any, message: string = ''): Promise<void> {
+    public async hardAssertElementHidden(element: any, message?: string): Promise<void> {
         try {
             await expect(element).toBeHidden();
         } catch (error) {
@@ -245,7 +245,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementHidden(element: any, message: string = ''): Promise<void> {
+    public async softAssertElementHidden(element: any, message?: string): Promise<void> {
         try {
             await expect.soft(element).toBeHidden();
         } catch (error) {
@@ -259,7 +259,7 @@ export class AssertionHelper {
      * @param {string} expectedText - The expected text.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementText(element: any, expectedText: string, message: string = ''): Promise<void> {
+    public async hardAssertElementText(element: any, expectedText: string, message?: string): Promise<void> {
         try {
             await expect(element).toHaveText(expectedText);
         } catch (error) {
@@ -274,7 +274,7 @@ export class AssertionHelper {
      * @param {string} expectedText - The expected text.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementText(element: any, expectedText: string, message: string = ''): Promise<void> {
+    public async softAssertElementText(element: any, expectedText: string, message?: string): Promise<void> {
         try {
             await expect.soft(element).toHaveText(expectedText);
         } catch (error) {
@@ -289,7 +289,7 @@ export class AssertionHelper {
      * @param {string} expectedValue - The expected value of the attribute.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementAttribute(element: any, attributeName: string, expectedValue: string, message: string = ''): Promise<void> {
+    public async hardAssertElementAttribute(element: any, attributeName: string, expectedValue: string, message?: string): Promise<void> {
         try {
             await expect(element).toHaveAttribute(attributeName, expectedValue);
         } catch (error) {
@@ -305,7 +305,7 @@ export class AssertionHelper {
      * @param {string} expectedValue - The expected value of the attribute.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementAttribute(element: any, attributeName: string, expectedValue: string, message: string = ''): Promise<void> {
+    public async softAssertElementAttribute(element: any, attributeName: string, expectedValue: string, message?: string): Promise<void> {
         try {
             await expect.soft(element).toHaveAttribute(attributeName, expectedValue);
         } catch (error) {
@@ -318,7 +318,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementEnabled(element: any, message: string = ''): Promise<void> {
+    public async hardAssertElementEnabled(element: any, message?: string): Promise<void> {
         try {
             await expect(element).toBeEnabled();
         } catch (error) {
@@ -332,7 +332,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementEnabled(element: any, message: string = ''): Promise<void> {
+    public async softAssertElementEnabled(element: any, message?: string): Promise<void> {
         try {
             await expect.soft(element).toBeEnabled();
         } catch (error) {
@@ -345,7 +345,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementDisabled(element: any, message: string = ''): Promise<void> {
+    public async hardAssertElementDisabled(element: any, message?: string): Promise<void> {
         try {
             await expect(element).toBeDisabled();
         } catch (error) {
@@ -359,7 +359,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementDisabled(element: any, message: string = ''): Promise<void> {
+    public async softAssertElementDisabled(element: any, message?: string): Promise<void> {
         try {
             await expect.soft(element).toBeDisabled();
         } catch (error) {
@@ -372,7 +372,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementInDOM(element: any, message: string = ''): Promise<void> {
+    public async hardAssertElementInDOM(element: any, message?: string): Promise<void> {
         try {
             await expect(element).toBeVisible(); // Or use .toBeInDOM if applicable
         } catch (error) {
@@ -386,7 +386,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementInDOM(element: any, message: string = ''): Promise<void> {
+    public async softAssertElementInDOM(element: any, message?: string): Promise<void> {
         try {
             await expect.soft(element).toBeVisible(); // Or use .toBeInDOM if applicable
         } catch (error) {
@@ -399,7 +399,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async hardAssertElementNotInDOM(element: any, message: string = ''): Promise<void> {
+    public async hardAssertElementNotInDOM(element: any, message?: string): Promise<void> {
         try {
             await expect(element).not.toBeVisible();
         } catch (error) {
@@ -413,7 +413,7 @@ export class AssertionHelper {
      * @param {Playwright.ElementHandle} element - The element to check.
      * @param {string} [message] - Optional custom error message.
      */
-    public static async softAssertElementNotInDOM(element: any, message: string = ''): Promise<void> {
+    public async softAssertElementNotInDOM(element: any, message?: string): Promise<void> {
         try {
             await expect.soft(element).not.toBeVisible();
         } catch (error) {
@@ -428,7 +428,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected object to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public static softAssertJsonEqual(actual: any, expected: any, message: string = ''): void {
+    public softAssertJsonEqual(actual: any, expected: any, message?: string): void {
         try {
             // Ensure both are objects before proceeding
             if (typeof actual !== 'object' || typeof expected !== 'object') {
