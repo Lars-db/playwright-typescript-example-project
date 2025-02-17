@@ -1,16 +1,15 @@
 import { BasePage } from './basePage';
 import { Page } from '@playwright/test';
+import { actionHelper } from '../utils/helpers/actionHelper.ts';
 
 export class DashboardPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
 
-  // Elements
-  private welcomeMessage = '.welcome-message';
+  private welcomeMessage = 'welcome-message';
 
-  // Actions
   async getWelcomeMessage() {
-    return await this.getText(this.welcomeMessage);
+    return await actionHelper.getElementText(this.page, this.welcomeMessage);
   }
 }

@@ -2,24 +2,26 @@ import { Page, Cookie, Locator } from '@playwright/test';
 
 export class actionHelper {
     /**
-     * Gets the text content of an element.
+     * Gets the text content of an element identified by a selector or a Locator.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the element.
+     * @param {string | Locator} selector - The CSS selector for the element or a Locator instance.
      * @returns {Promise<string>} - The text content of the element.
      */
-    public static async getElementText(page: Page, selector: string): Promise<string> {
+    public static async getElementText(page: Page, selector: string | Locator): Promise<string> {
         try {
-            const element = await page.$(selector);
-            if (element) {
-                const text = await element.innerText();
-                console.log(`Text from element "${selector}": ${text}`);
-                return text;
-            } else {
-                console.error(`Element "${selector}" not found.`);
-                throw new Error(`Element "${selector}" not found.`);
-            }
+            // Resolve the selector to a Locator if it's a string
+            const locator = typeof selector === 'string' ? page.locator(selector) : selector;
+
+            // Wait for the element to be visible before getting the text
+            await locator.waitFor({ state: 'visible' });
+
+            // Retrieve the text content
+            const text = await locator.innerText();
+            console.log(`Text from element: ${text}`);
+
+            return text;
         } catch (error) {
-            console.error(`Error getting text from element "${selector}":`, error);
+            console.error(`Error getting text from element "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
             throw error;
         }
     }
@@ -193,22 +195,28 @@ export class actionHelper {
     }
 
     /**
-     * Types text into an input field.
+     * Types text into an input field identified by a selector or a Locator.
      * @param {Page} page - The page instance.
-     * @param {string} selector - The CSS selector for the input field.
+     * @param {string | Locator} selector - The CSS selector for the input field or a Locator instance.
      * @param {string} text - The text to type into the input field.
      * @param {number} [timeout=30000] - Optional timeout for the typing action.
      * @returns {Promise<void>}
      */
-    public static async typeIntoField(page: Page, selector: string, text: string, timeout: number = 30000): Promise<void> {
+    public static async typeIntoField(page: Page, selector: string | Locator, text: string, timeout: number = 30000): Promise<void> {
         try {
-            await page.fill(selector, text, { timeout });
-            console.log(`Typed "${text}" into field: ${selector}`);
+            const locator = typeof selector === 'string' ? page.locator(selector) : selector;
+
+            // Wait for the input field to be visible before typing
+            await locator.waitFor({ state: 'visible', timeout });
+            await locator.fill(text, { timeout });
+
+            console.log(`Typed "${text}" into field: ${typeof selector === 'string' ? selector : selector.toString()}`);
         } catch (error) {
-            console.error(`Error typing into field "${selector}":`, error);
+            console.error(`Error typing into field "${typeof selector === 'string' ? selector : selector.toString()}":`, error);
             throw error;
         }
     }
+
 
     /**
      * Double clicks on an element.

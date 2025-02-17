@@ -14,9 +14,9 @@ export class ContactPage extends BasePage {
   private successMessage = '.success-message';
 
   async fillContactForm(name: string, email: string, message: string) {
-    await this.type(this.nameField, name);
-    await this.type(this.emailField, email);
-    await this.type(this.messageField, message);
+    await actionHelper.typeIntoField(this.page, this.nameField, name);
+    await actionHelper.typeIntoField(this.page, this.emailField, email);
+    await actionHelper.typeIntoField(this.page, this.messageField, message);
   }
 
   async submitForm() {
@@ -24,6 +24,6 @@ export class ContactPage extends BasePage {
   }
 
   async getSuccessMessage() {
-    return await this.getText(this.successMessage);
+    return await actionHelper.getElementText(this.page, this.successMessage);
   }
 }
