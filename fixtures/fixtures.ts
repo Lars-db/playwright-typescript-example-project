@@ -16,7 +16,7 @@ export type MyFixtures = {
 
 const test = baseTest.extend<MyFixtures>({
   browser: async ({}, use) => {
-    const browser = await BrowserHelper.launchBrowser();
+    const browser = await BrowserHelper.launchBrowser(); // provide specific browser type between brackets (dynamically with env variable for example :-) )
     await use(browser);
     await browser.close();
   },
