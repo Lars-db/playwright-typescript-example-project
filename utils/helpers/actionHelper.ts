@@ -6,15 +6,16 @@ export class actionHelper {
      * Gets the text content of an element identified by a selector or a Locator.
      * @param {Page} page - The page instance.
      * @param {string | Locator} selector - The CSS selector for the element or a Locator instance.
+     * @param {number} [timeout=45000] - Optional timeout for the click action.
      * @returns {Promise<string>} - The text content of the element.
      */
-    public static async getElementText(page: Page, selector: string | Locator): Promise<string> {
+    public static async getElementText(page: Page, selector: string | Locator, timeout: number = 45000): Promise<string> {
         try {
             // Resolve the selector to a Locator if it's a string
             const locator = typeof selector === 'string' ? page.locator(selector) : selector;
 
             // Wait for the element to be visible before getting the text
-            await locator.waitFor({ state: 'visible' });
+            await locator.waitFor({ state: 'visible', timeout: timeout });
 
             // Retrieve the text content
             const text = await locator.innerText();
@@ -186,10 +187,10 @@ export class actionHelper {
      * Clicks on an element identified by a selector or a Locator.
      * @param {Page} page - The page instance.
      * @param {string | Locator} selector - The CSS selector for the element or a Locator instance.
-     * @param {number} [timeout=30000] - Optional timeout for the click action.
+     * @param {number} [timeout=45000] - Optional timeout for the click action.
      * @returns {Promise<void>}
      */
-    public static async clickElement(page: Page, selector: string | Locator, timeout: number = 30000): Promise<void> {
+    public static async clickElement(page: Page, selector: string | Locator, timeout: number = 45000): Promise<void> {
         try {
             const locator = typeof selector === 'string' ? page.locator(selector) : selector;
 

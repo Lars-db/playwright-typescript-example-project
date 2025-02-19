@@ -7,11 +7,11 @@ export class ContactPage extends BasePage {
     super(page);
   }
 
-  private nameField = '#name';
-  private emailField = '#email';
-  private messageField = '#message';
-  private submitButton = '#submit-button';
-  private successMessage = '.success-message';
+  private readonly nameField = '#name';
+  private readonly emailField = '#email';
+  private readonly messageField = '#message';
+  private readonly submitButton = '#submit-button';
+  private readonly successMessage = '.success-message';
 
   async fillContactForm(name: string, email: string, message: string) {
     await actionHelper.typeIntoField(this.page, this.nameField, name);

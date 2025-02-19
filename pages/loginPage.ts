@@ -7,10 +7,10 @@ export class LoginPage extends BasePage {
     super(page);
   }
 
-  private usernameField = '#username';
-  private passwordField = '#password';
-  private loginButton = this.page.getByRole('button', { name: 'Login'});
-  private acceptCookiesBtn = this.page.getByRole('button', { name: 'Consent'});
+  private readonly usernameField = '#username';
+  private readonly passwordField = '#password';
+  private readonly loginButton = this.page.getByRole('button', { name: 'Login'});
+  private readonly acceptCookiesBtn = this.page.getByRole('button', { name: 'Consent'});
 
   async navigateToLoginPage() {
     await actionHelper.navigateTo(this.page, 'https://practice.expandtesting.com/login');

@@ -7,7 +7,7 @@ export class DashboardPage extends BasePage {
     super(page);
   }
 
-  private welcomeMessage = this.page.getByRole('alert', { name: 'You logged into a secure area!'});
+  private readonly welcomeMessage = '#flash';
 
   async getSuccessfullLoginMsg() {
     return await actionHelper.getElementText(this.page, this.welcomeMessage);
