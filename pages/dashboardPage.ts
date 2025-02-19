@@ -7,9 +7,14 @@ export class DashboardPage extends BasePage {
     super(page);
   }
 
-  private welcomeMessage = 'welcome-message';
+  private welcomeMessage = this.page.getByRole('alert', { name: 'You logged into a secure area!'});
 
-  async getWelcomeMessage() {
+  async getSuccessfullLoginMsg() {
     return await actionHelper.getElementText(this.page, this.welcomeMessage);
   }
+
+  async getUrl() {
+    return this.page.url();
+  }
+
 }

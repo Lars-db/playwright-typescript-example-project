@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { logger } from '../logger';
 
 export class AssertionHelper {
 
@@ -12,7 +13,7 @@ export class AssertionHelper {
         try {
             expect(actual).toBe(expected);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -27,7 +28,7 @@ export class AssertionHelper {
         try {
             expect.soft(actual).toBe(expected);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -41,7 +42,7 @@ export class AssertionHelper {
         try {
             expect(actual).not.toBe(expected);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -56,7 +57,7 @@ export class AssertionHelper {
         try {
             expect.soft(actual).not.toBe(expected);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -69,7 +70,7 @@ export class AssertionHelper {
         try {
             expect(actual).toBe(true);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -83,7 +84,7 @@ export class AssertionHelper {
         try {
             expect.soft(actual).toBe(true);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -96,7 +97,7 @@ export class AssertionHelper {
         try {
             expect(actual).toBe(false);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -110,7 +111,7 @@ export class AssertionHelper {
         try {
             expect.soft(actual).toBe(false);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -124,7 +125,7 @@ export class AssertionHelper {
             expect(actual).not.toBeNull();
             expect(actual).not.toBeUndefined();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -139,7 +140,7 @@ export class AssertionHelper {
             expect.soft(actual).not.toBeNull();
             expect.soft(actual).not.toBeUndefined();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -152,7 +153,7 @@ export class AssertionHelper {
         try {
             expect(actual).toBeNull();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -166,7 +167,7 @@ export class AssertionHelper {
         try {
             expect.soft(actual).toBeNull();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -180,7 +181,7 @@ export class AssertionHelper {
         try {
             expect(actual).toContain(expectedSubstring);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -195,7 +196,7 @@ export class AssertionHelper {
         try {
             expect.soft(actual).toContain(expectedSubstring);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -208,7 +209,7 @@ export class AssertionHelper {
         try {
             await expect(element).toBeVisible();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -222,7 +223,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).toBeVisible();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -235,7 +236,7 @@ export class AssertionHelper {
         try {
             await expect(element).toBeHidden();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -249,7 +250,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).toBeHidden();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -263,7 +264,7 @@ export class AssertionHelper {
         try {
             await expect(element).toHaveText(expectedText);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -278,7 +279,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).toHaveText(expectedText);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -293,7 +294,7 @@ export class AssertionHelper {
         try {
             await expect(element).toHaveAttribute(attributeName, expectedValue);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -309,7 +310,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).toHaveAttribute(attributeName, expectedValue);
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -322,7 +323,7 @@ export class AssertionHelper {
         try {
             await expect(element).toBeEnabled();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -336,7 +337,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).toBeEnabled();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -349,7 +350,7 @@ export class AssertionHelper {
         try {
             await expect(element).toBeDisabled();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -363,7 +364,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).toBeDisabled();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -376,7 +377,7 @@ export class AssertionHelper {
         try {
             await expect(element).toBeVisible(); // Or use .toBeInDOM if applicable
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -390,7 +391,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).toBeVisible(); // Or use .toBeInDOM if applicable
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -403,7 +404,7 @@ export class AssertionHelper {
         try {
             await expect(element).not.toBeVisible();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
             throw error;
         }
     }
@@ -417,7 +418,7 @@ export class AssertionHelper {
         try {
             await expect.soft(element).not.toBeVisible();
         } catch (error) {
-            console.error(`Assertion failed: ${message}`);
+            logger.error(`Assertion failed: ${message}`);
         }
     }
 
@@ -449,11 +450,41 @@ export class AssertionHelper {
             if (mismatches.length > 0) {
                 const mismatchDetails = mismatches.join('\n');
                 const detailedMessage = `${message} Mismatches: ${mismatchDetails}`;
-                console.error(`Assertion failed: ${detailedMessage}`);
+                logger.error(`Assertion failed: ${detailedMessage}`);
             }
         } catch (error) {
             // Handle and log unexpected errors
-            console.error(`Assertion failed: ${message} - ${error.message}`);
+            logger.error(`Assertion failed: ${message} - ${error.message}`);
         }
     }
+
+        /**
+         * Hard asserts that the actual URL is equal to the expected URL.
+         * @param {string} actualUrl - The url to check.
+         * @param {string} expectedUrl - The expected url to compare with.
+         * @param {string} [message] - Optional custom error message.
+         */
+        public async hardAssertPageUrl(actualUrl: string, expectedUrl: string, message?: string): Promise<void> {
+            try {
+                await expect(actualUrl).toBe(expectedUrl);
+            } catch (error) {
+                logger.error(`Assertion failed: ${message}`);
+                throw error;
+            }
+        }
+    
+        /**
+         * Soft asserts that the actual URL is equal to the expected URL.
+         * @param {string} actualUrl - The url to check.
+         * @param {string} expectedUrl - The expected url to compare with.
+         * @param {string} [message] - Optional custom error message.
+         */
+        public async softAssertPageUrl(actualUrl: string, expectedUrl: string, message?: string): Promise<void> {
+            try {
+                await expect.soft(actualUrl).toBe(expectedUrl);
+                logger.debug('Assertion passed. URL Matched');
+            } catch (error) {
+                logger.error(`Assertion failed: ${message}`);
+            }
+        }
 }

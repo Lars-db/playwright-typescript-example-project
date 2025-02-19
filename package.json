@@ -2,7 +2,11 @@
   "name": "playwright-projectje",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:dev": "ENV=development npx playwright test",
+    "test:test": "ENV=test npx playwright test",
+    "test:acc": "ENV=acceptance npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
