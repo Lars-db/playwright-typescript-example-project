@@ -28,7 +28,7 @@ export class actionHelper {
         }
     }
 
-/**
+    /**
      * Waits for an element to appear on the page.
      * @param {Page} page - The page instance.
      * @param {string | Locator} selectorOrLocator - The CSS selector as a string or a Playwright Locator.
@@ -349,9 +349,7 @@ export class actionHelper {
         }
     }
 
-    /**
-   * Drags an element and drops it onto another element using Playwright's mouse API.
-   */
+    // Drags an element and drops it onto another element using Playwright's mouse API.
     public static async dragAndDrop(
         page: Page, 
         source: string | Locator, 
@@ -381,12 +379,12 @@ export class actionHelper {
         }
     }
 
-    /** Resolves a string selector or Locator into a Playwright Locator. */
+    // Resolves a string selector or Locator into a Playwright Locator. 
     private static resolveLocator(page: Page, element: string | Locator): Locator {
         return typeof element === 'string' ? page.locator(element) : element;
     }
 
-    /** Ensures that an element is visible before interaction. */
+    // Ensures that an element is visible before interaction.
     private static async ensureElementVisible(locator: Locator, timeout: number): Promise<void> {
         await locator.waitFor({ state: 'visible', timeout });
     }
@@ -396,7 +394,7 @@ export class actionHelper {
         return await locator.boundingBox();
     }
 
-    /** Performs the actual drag-and-drop action using Playwright's mouse API. */
+    // Performs the actual drag-and-drop action using Playwright's mouse API.
     private static async performDragAndDrop(
         page: Page, 
         sourceBox: { x: number; y: number; width: number; height: number }, 
