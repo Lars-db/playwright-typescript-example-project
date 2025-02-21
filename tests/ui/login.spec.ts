@@ -1,16 +1,16 @@
-import { test } from '../../fixtures/fixtures.ts';
+import { uiTest } from '../fixtures/uiFixtures.ts';
 
-test('Successfull login', async ({ loginPage, dashboardPage, assertionHelper }) => {
-  await test.step('Given I am on the login page', async () => {
+uiTest('As a registered user, I want to successfully log in to the secure area of the application', async ({ loginPage, dashboardPage, assertionHelper }) => {
+  await uiTest.step('Given I am on the login page', async () => {
     await loginPage.navigateToLoginPage();
     await loginPage.acceptCookies();
   });
 
-  await test.step('When I sign in', async () => {
+  await uiTest.step('When I sign in', async () => {
     await loginPage.login(process.env.VALID_USERNAME!, process.env.VALID_PASSWORD!);
   });
 
-  await test.step('Then I should see the welcome message', async () => {
+  await uiTest.step('Then I should see the welcome message', async () => {
     const actualUrl: string = await dashboardPage.getUrl();
     assertionHelper.softAssertPageUrl(actualUrl, process.env.SUCCESSFULL_LOGIN_URL!,
     `Actual URL ${actualUrl} did not match expected value: ${process.env.SUCCESSFULL_LOGIN_URL!}`);

@@ -1,11 +1,11 @@
 import { test as baseTest, expect, Browser, Page } from '@playwright/test';
-import { LoginPage } from '../pages/loginPage';
-import { DashboardPage } from '../pages/dashboardPage';
-import { BrowserHelper } from '../utils/helpers/browserHelper';
-import { ContactPage } from '../pages/contactPage';
-import { AssertionHelper } from '../utils/helpers/assertionHelper';
+import { LoginPage } from '../../pages/loginPage';
+import { DashboardPage } from '../../pages/dashboardPage';
+import { BrowserHelper } from '../../utils/helpers/browserHelper';
+import { ContactPage } from '../../pages/contactPage';
+import { AssertionHelper } from '../../utils/helpers/assertionHelper';
 
-export type MyFixtures = {
+export type UiFixtures = {
   browser: Browser;
   page: Page;
   loginPage: LoginPage;
@@ -14,9 +14,9 @@ export type MyFixtures = {
   assertionHelper: AssertionHelper;
 };
 
-const test = baseTest.extend<MyFixtures>({
+const uiTest = baseTest.extend<UiFixtures>({
   browser: async ({}, use) => {
-    const browser = await BrowserHelper.launchBrowser(); // provide specific browser type between brackets (dynamically with env variable for example :-) )
+    const browser = await BrowserHelper.launchBrowser();
     await use(browser);
     await browser.close();
   },
@@ -40,4 +40,4 @@ const test = baseTest.extend<MyFixtures>({
   }
 });
 
-export { test, expect };
+export { uiTest, expect };

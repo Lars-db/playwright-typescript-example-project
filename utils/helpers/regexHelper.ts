@@ -6,7 +6,7 @@ export class RegexHelper {
      * @param {string} pattern - The regex pattern to match against.
      * @returns {boolean} - Returns true if the input matches the regex pattern, otherwise false.
      */
-    public static validateRegex(input: string, pattern: string): boolean {
+    public validateRegex(input: string, pattern: string): boolean {
         const regex = new RegExp(pattern);
         return regex.test(input);
     }
@@ -17,7 +17,7 @@ export class RegexHelper {
      * @param {string} pattern - The regex pattern to match.
      * @returns {string[]} - Returns an array of all matched substrings.
      */
-    public static extractMatches(input: string, pattern: string): string[] {
+    public extractMatches(input: string, pattern: string): string[] {
         const regex = new RegExp(pattern, 'g');
         return input.match(regex) || [];
     }
@@ -29,7 +29,7 @@ export class RegexHelper {
      * @param {string} replacement - The string to replace matches with.
      * @returns {string} - Returns the modified string with replacements.
      */
-    public static replacePattern(input: string, pattern: string, replacement: string): string {
+    public replacePattern(input: string, pattern: string, replacement: string): string {
         const regex = new RegExp(pattern, 'g');
         return input.replace(regex, replacement);
     }
@@ -40,7 +40,7 @@ export class RegexHelper {
      * @param {string} pattern - The regex pattern to match.
      * @returns {string | null} - Returns the first match found or null if no match is found.
      */
-    public static extractFirstMatch(input: string, pattern: string): string | null {
+    public extractFirstMatch(input: string, pattern: string): string | null {
         const regex = new RegExp(pattern);
         const match = regex.exec(input);
         return match ? match[0] : null;
@@ -51,7 +51,7 @@ export class RegexHelper {
      * @param {string} input - The string to check.
      * @returns {boolean} - Returns true if the string is a valid email, otherwise false.
      */
-    public static isValidEmail(input: string): boolean {
+    public isValidEmail(input: string): boolean {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return this.validateRegex(input, emailPattern.source);
     }
@@ -61,7 +61,7 @@ export class RegexHelper {
      * @param {string} input - The string to check.
      * @returns {boolean} - Returns true if the string is a valid phone number, otherwise false.
      */
-    public static isValidPhoneNumber(input: string): boolean {
+    public isValidPhoneNumber(input: string): boolean {
         const phonePattern = /^\+?[1-9]\d{1,14}$/; // International phone number format
         return this.validateRegex(input, phonePattern.source);
     }
@@ -71,7 +71,7 @@ export class RegexHelper {
      * @param {string} input - The string to extract the number from.
      * @returns {number | null} - Returns the extracted number or null if no number is found.
      */
-    public static extractNumber(input: string): number | null {
+    public extractNumber(input: string): number | null {
         const numberPattern = /[-+]?\d*\.?\d+/;
         const match = this.extractFirstMatch(input, numberPattern.source);
         return match ? parseFloat(match) : null;
@@ -82,7 +82,7 @@ export class RegexHelper {
      * @param {string} input - The string to validate.
      * @returns {boolean} - Returns true if the string contains only letters (a-z, A-Z), otherwise false.
      */
-    public static isAlphabetic(input: string): boolean {
+    public isAlphabetic(input: string): boolean {
         const alphabeticPattern = /^[a-zA-Z]+$/;
         return this.validateRegex(input, alphabeticPattern.source);
     }
@@ -92,7 +92,7 @@ export class RegexHelper {
      * @param {string} input - The string to validate.
      * @returns {boolean} - Returns true if the string contains only digits, otherwise false.
      */
-    public static isNumeric(input: string): boolean {
+    public isNumeric(input: string): boolean {
         const numericPattern = /^\d+$/;
         return this.validateRegex(input, numericPattern.source);
     }
@@ -102,7 +102,7 @@ export class RegexHelper {
      * @param {string} input - The string to validate.
      * @returns {boolean} - Returns true if the string contains only alphanumeric characters, otherwise false.
      */
-    public static isAlphanumeric(input: string): boolean {
+    public isAlphanumeric(input: string): boolean {
         const alphanumericPattern = /^[a-zA-Z0-9]+$/;
         return this.validateRegex(input, alphanumericPattern.source);
     }
@@ -112,7 +112,7 @@ export class RegexHelper {
      * @param {string} input - The string to validate.
      * @returns {boolean} - Returns true if the string is a valid URL, otherwise false.
      */
-    public static isValidURL(input: string): boolean {
+    public isValidURL(input: string): boolean {
         const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
         return this.validateRegex(input, urlPattern.source);
     }

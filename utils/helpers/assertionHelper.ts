@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { logger } from '../logger';
 
 export class AssertionHelper {
+    [x: string]: any;
 
     /**
      * Hard asserts that the actual value is equal to the expected value.
@@ -9,7 +10,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public hardAssertEqual(actual: any, expected: any, message?: string): void {
+    public hardAssertEquals(actual: any, expected: any, message?: string): void {
         try {
             expect(actual).toBe(expected);
         } catch (error) {
@@ -24,7 +25,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public softAssertEqual(actual: any, expected: any, message?: string): void {
+    public softAssertEquals(actual: any, expected: any, message?: string): void {
         try {
             expect.soft(actual).toBe(expected);
         } catch (error) {
@@ -38,7 +39,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public hardAssertNotEqual(actual: any, expected: any, message?: string): void {
+    public hardAssertNotEquals(actual: any, expected: any, message?: string): void {
         try {
             expect(actual).not.toBe(expected);
         } catch (error) {
@@ -53,7 +54,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected value to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public softAssertNotEqual(actual: any, expected: any, message?: string): void {
+    public softAssertNotEquals(actual: any, expected: any, message?: string): void {
         try {
             expect.soft(actual).not.toBe(expected);
         } catch (error) {
@@ -429,7 +430,7 @@ export class AssertionHelper {
      * @param {any} expected - The expected object to compare with.
      * @param {string} [message] - Optional custom error message.
      */
-    public softAssertJsonEqual(actual: any, expected: any, message?: string): void {
+    public softAssertJsonEquals(actual: any, expected: any, message?: string): void {
         try {
             // Ensure both are objects before proceeding
             if (typeof actual !== 'object' || typeof expected !== 'object') {

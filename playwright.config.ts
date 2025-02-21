@@ -49,6 +49,14 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+    {
+      name: 'ui',
+      testMatch: ['tests/ui/**/*.ts'], // Runs only tests in the 'ui' folder
+    },
+    {
+      name: 'api',
+      testMatch: ['tests/api/**/*.ts'], // Runs only tests in the 'api' folder
+    }
 
     /* Test against mobile viewports. */
     // {
