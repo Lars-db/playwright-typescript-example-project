@@ -1,4 +1,4 @@
-import { apiTest } from "../../fixtures/apiFixtures";
+import { apiTest } from "../../fixtures/apiTestFixtures";
 import { v4 as UUID } from 'uuid';
 
 /*

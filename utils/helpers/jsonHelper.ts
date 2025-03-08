@@ -1,3 +1,5 @@
+import { APIResponse } from "@playwright/test";
+
 export class JsonHelper {
 
     /**
@@ -159,5 +161,14 @@ export class JsonHelper {
      */
     public static validateJsonSchema(jsonObject: object, requiredKeys: string[]): boolean {
         return requiredKeys.every(key => key in jsonObject);
+    }
+
+
+    public static async safeJsonParse(response: APIResponse): Promise<any> {
+        try {
+            return await response.json();
+        } catch (error) {
+            throw new Error(`Response from ${response.url} was not valid JSON.`);
+        }
     }
 }
