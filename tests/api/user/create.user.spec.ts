@@ -1,5 +1,5 @@
 import { RegexEnum } from "../../../enums/regexEnums";
-import { apiTest } from "../../fixtures/apiFixtures";
+import { apiTest } from "../../fixtures/apiTestFixtures";
 import { v4 as UUID } from 'uuid';
 
 apiTest('As a new user I want to successfully create an account and verify account details', async ({ request, assertionHelper, regexHelper }) => {

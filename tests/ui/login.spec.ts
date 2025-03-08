@@ -1,4 +1,4 @@
-import { uiTest } from '../fixtures/uiFixtures.ts';
+import { uiTest } from '../fixtures/uiTestFixtures';
 
 uiTest('As a registered user, I want to successfully log in to the secure area of the application', async ({ loginPage, dashboardPage, assertionHelper }) => {
   await uiTest.step('Given I am on the login page', async () => {
